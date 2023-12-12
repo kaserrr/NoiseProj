@@ -1,9 +1,16 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddLogging(loggingBuilder => loggingBuilder
+    .AddConsole()
+    .SetMinimumLevel(LogLevel.Debug)
+);
+
 
 var app = builder.Build();
 
