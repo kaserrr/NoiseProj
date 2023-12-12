@@ -3,10 +3,9 @@
 @layout CustomLayout
 
 @using Microsoft.AspNetCore.Components
-
-
+@using Database
+@inject ILogger<Index> Logger
 @inject NavigationManager NavigationManager
-
 
 <div class="h-screen flex items-center justify-center bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500">
     <div class="bg-white flex flex-col items-center justify-center p-12 shadow-md">
@@ -41,16 +40,21 @@
 
     private void AttemptLogin()
     {
+        // Initialize the database
+        DatabaseBuilder.EnsureDatabase(Logger);
+
         // Hardcoded username and password for demonstration purposes
         if (username == "demo" && password == "password")
         {
             loginLoading = true;
             // Successful login, navigate to the protected page
+            Logger.LogInformation("Login successful.");
             NavigationManager.NavigateTo("/Config");
         }
         else
         {
             loginFailed = true;
+            Logger.LogError("Login failed.");
         }
     }
 
@@ -63,4 +67,3 @@
         }
     }
 }
-
