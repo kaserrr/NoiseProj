@@ -58,8 +58,9 @@
         }
     }
 
-    private void HandleKeyPress(KeyboardEventArgs e)
+    private async void HandleKeyPress(KeyboardEventArgs e)
     {
+        await Task.Delay(500);
         if (e.Key == "Enter")
         {
             // Enter key is pressed, attempt login
